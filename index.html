@@ -45,7 +45,9 @@
       mix-blend-mode:multiply;
     }
 
-    .wrap{ width:min(1180px, 92vw); margin:0 auto; padding:26px 0 70px; position:relative; }
+    /* wider container so the 4/5 vs 1/5 split feels real */
+    .wrap{ width:min(1400px, 94vw); margin:0 auto; padding:26px 0 70px; position:relative; }
+
     .topline{ display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; align-items:center; margin-bottom:14px; }
     .chip{
       background: rgba(255,255,255,.75);
@@ -58,15 +60,19 @@
       font-weight:700;
     }
 
-    /* Less cramped header layout */
+    /* ✅ 5-column grid: hero spans 4, note spans 1 */
     .header{
       display:grid;
-      grid-template-columns: 1.35fr .65fr;
+      grid-template-columns: repeat(5, 1fr);
       gap:18px;
       align-items:start;
     }
+    .hero{ grid-column: span 4; }
+    .note{ grid-column: span 1; }
+
     @media (max-width: 980px){
-      .header{ grid-template-columns:1fr; }
+      .header{ grid-template-columns: 1fr; }
+      .hero,.note{ grid-column: auto; }
     }
 
     .hero{
@@ -100,7 +106,7 @@
       color:var(--muted);
       font-size:16px;
       line-height:1.55;
-      max-width:70ch;
+      max-width:75ch;
       font-weight:700;
     }
     .sub em{ font-style:normal; font-weight:900; color:#333; }
@@ -138,7 +144,7 @@
     }
     .note p{
       margin:10px 0 0;
-      font-size:16px;
+      font-size:15px;          /* slightly smaller to fit the narrow 1/5 column */
       line-height:1.55;
       color:#333;
       font-weight:700;
@@ -181,7 +187,7 @@
     .box .n{ font-size: 20px; }
     .box .t{ font-size: 12px; color:#333; opacity:.8; }
 
-    /* Stickers: make it roomy + prevent overlap */
+    /* Stickers */
     .stickers{
       margin-top:16px;
       display:grid;
@@ -195,23 +201,21 @@
 
     .sticker{
       display:flex;
-      flex-direction:column;     /* stacks cleanly */
+      flex-direction:column;
       gap:12px;
       padding: 16px;
       border-radius: 20px;
       background: rgba(255,255,255,.90);
       border:1px solid var(--border);
       box-shadow: var(--shadow2);
-      overflow:hidden;           /* ensures no “cut through” overlap */
+      overflow:hidden;
     }
     .sticker .title{ font-weight:1000; margin:0; font-size:18px; }
     .sticker small{ display:block; margin-top:3px; color:#666; font-size:13px; line-height:1.35; font-weight:800; }
-
-    /* BIG & responsive SVGs */
     .bigSvg{
       width:100%;
       height:auto;
-      max-width: 520px;          /* makes them feel “half the box” */
+      max-width: 520px;
       align-self:center;
       display:block;
     }
@@ -390,7 +394,6 @@
           </div>
         </div>
 
-        <!-- ROOMY stickers (no overlap, no crowding) -->
         <div class="stickers">
           <div class="sticker">
             <svg class="bigSvg" viewBox="0 0 220 160" xmlns="http://www.w3.org/2000/svg" aria-label="Cute couple and dogs">
@@ -441,7 +444,7 @@
                 </g>
               </g>
 
-              <!-- him (NO big pink heart over face anymore) -->
+              <!-- him -->
               <g transform="translate(70,18)">
                 <circle cx="42" cy="34" r="22" fill="#E7C7A1"/>
                 <path d="M22 30 Q42 6 62 30 Q60 12 42 10 Q24 12 22 30Z" fill="#5A3B2E"/>
@@ -696,4 +699,3 @@
   </script>
 </body>
 </html>
-
