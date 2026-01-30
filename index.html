@@ -114,53 +114,57 @@
       background: linear-gradient(135deg, rgba(255,229,158,.9), rgba(183,240,255,.9));
     }
 
-    .note{
-      background: rgba(255,255,255,.82);
-      border:1px solid var(--border);
-      border-radius:22px;
-      box-shadow: var(--shadow);
-      padding:16px;
-    }
-    .note h2{
-      margin:0;
-      font-size:13px;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      color:#666;
-    }
-    .note p{
-      margin:10px 0 0;
-      font-size:16px;
-      line-height:1.55;
-      color:#333;
-      font-weight:700;
-    }
     .hl{ color: var(--accent); font-weight:900; }
 
-    /* BIG sticker row */
-    .stickers{
-      margin-top:14px;
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:12px;
-      align-items:stretch;
-    }
-    @media (max-width: 740px){ .stickers{grid-template-columns:1fr;} }
+    /* FULL-WIDTH stickers strip (couple + fish + note all in one row) */
+    .stickers{ margin-top:14px; }
 
-    .sticker{
+    .stickerWide{
+      background: rgba(255,255,255,.86);
+      border:1px solid var(--border);
+      border-radius:22px;
+      box-shadow: var(--shadow2);
+      padding:14px;
+      display:grid;
+      grid-template-columns: 1.1fr 1.1fr 1fr; /* couple | fish | note */
+      gap:14px;
+      align-items:stretch;
+      width:100%;
+      overflow:visible;
+    }
+    @media (max-width: 980px){
+      .stickerWide{ grid-template-columns:1fr; }
+    }
+
+    .stickerTile{
+      background: rgba(255,255,255,.92);
+      border:1px solid var(--border);
+      border-radius:18px;
+      box-shadow: var(--shadow2);
+      padding:14px;
       display:flex;
       gap:14px;
       align-items:center;
-      padding: 14px;
-      border-radius: 20px;
-      background: rgba(255,255,255,.86);
-      border:1px solid var(--border);
-      box-shadow: var(--shadow2);
+      min-width:0;
     }
-    .sticker .title{ font-weight:1000; margin:0; font-size:18px; }
-    .sticker small{ display:block; margin-top:3px; color:#666; font-size:13px; line-height:1.35; font-weight:800; }
-    .bigSvg{ width: 240px; height:auto; max-width: 46vw; }
-    @media (max-width: 740px){ .bigSvg{ width: 260px; max-width: 75vw; } }
+    .stickerText .title{ font-weight:1000; margin:0; font-size:18px; }
+    .stickerText small{ display:block; margin-top:3px; color:#666; font-size:13px; line-height:1.35; font-weight:800; }
+
+    /* Make couple + dogs BIG (about half an image) */
+    .bigSvg{
+      width: 360px;
+      height:auto;
+      max-width: 48vw;
+      flex: 0 0 auto;
+    }
+    .fishSvg{
+      width: 420px;     /* extra width so it never clips */
+      max-width: 56vw;
+    }
+    @media (max-width: 980px){
+      .bigSvg{ width: 420px; max-width: 82vw; }
+      .fishSvg{ width: 520px; max-width: 92vw; }
+    }
 
     /* Countdown */
     .countdown{
@@ -373,143 +377,157 @@
           </div>
         </div>
 
-        <!-- BIG stickers (make couple/dogs ~huge) -->
+        <!-- FULL-WIDTH strip: couple + fish + note (so fish never clips) -->
         <div class="stickers">
-          <div class="sticker">
-            <svg class="bigSvg" viewBox="0 0 220 160" xmlns="http://www.w3.org/2000/svg" aria-label="Cute couple and dogs">
-              <g opacity="0.9">
-                <circle cx="20" cy="24" r="3" fill="#8BE9FD"/>
-                <circle cx="42" cy="12" r="2" fill="#FF79C6"/>
-                <circle cx="192" cy="18" r="3" fill="#50FA7B"/>
-              </g>
-
-              <!-- dogs -->
-              <g transform="translate(10,92)">
-                <g transform="translate(0,0)">
-                  <ellipse cx="32" cy="34" rx="26" ry="22" fill="#111"/>
-                  <circle cx="22" cy="26" r="10" fill="#151515"/>
-                  <circle cx="42" cy="26" r="10" fill="#151515"/>
-                  <path d="M16 18 L6 6 Q16 8 18 18Z" fill="#111"/>
-                  <path d="M48 18 L58 6 Q48 8 46 18Z" fill="#111"/>
-                  <circle cx="26" cy="28" r="2.4" fill="#fff"/>
-                  <circle cx="38" cy="28" r="2.4" fill="#fff"/>
-                  <circle cx="26" cy="28" r="1.2" fill="#000"/>
-                  <circle cx="38" cy="28" r="1.2" fill="#000"/>
-                  <path d="M30 36 Q32 40 34 36" stroke="#444" stroke-width="3" stroke-linecap="round"/>
-                  <rect x="18" y="40" width="28" height="6" rx="3" fill="#8BE9FD"/>
-                  <text x="32" y="55" text-anchor="middle"
-                        font-size="10" font-weight="900" fill="#ffffff"
-                        style="letter-spacing:.04em; paint-order: stroke; stroke: rgba(0,0,0,.55); stroke-width:1;">
-                    ELLA
-                  </text>
+          <div class="stickerWide">
+            <!-- Tile 1: couple + dogs -->
+            <div class="stickerTile">
+              <svg class="bigSvg" viewBox="0 0 220 160" xmlns="http://www.w3.org/2000/svg" aria-label="Cute couple and dogs">
+                <g opacity="0.9">
+                  <circle cx="20" cy="24" r="3" fill="#8BE9FD"/>
+                  <circle cx="42" cy="12" r="2" fill="#FF79C6"/>
+                  <circle cx="192" cy="18" r="3" fill="#50FA7B"/>
                 </g>
 
-                <g transform="translate(62,2)">
-                  <ellipse cx="32" cy="34" rx="26" ry="22" fill="#0F0F0F"/>
-                  <circle cx="22" cy="26" r="10" fill="#141414"/>
-                  <circle cx="42" cy="26" r="10" fill="#141414"/>
-                  <path d="M16 18 L6 6 Q16 8 18 18Z" fill="#0F0F0F"/>
-                  <path d="M48 18 L58 6 Q48 8 46 18Z" fill="#0F0F0F"/>
-                  <circle cx="26" cy="28" r="2.4" fill="#fff"/>
-                  <circle cx="38" cy="28" r="2.4" fill="#fff"/>
-                  <circle cx="26" cy="28" r="1.2" fill="#000"/>
-                  <circle cx="38" cy="28" r="1.2" fill="#000"/>
-                  <path d="M30 36 Q32 40 34 36" stroke="#444" stroke-width="3" stroke-linecap="round"/>
-                  <rect x="18" y="40" width="28" height="6" rx="3" fill="#FF79C6"/>
-                  <text x="32" y="55" text-anchor="middle"
-                        font-size="9" font-weight="900" fill="#ffffff"
-                        style="letter-spacing:.02em; paint-order: stroke; stroke: rgba(0,0,0,.55); stroke-width:1;">
-                    HENRIETTA
-                  </text>
+                <!-- dogs -->
+                <g transform="translate(10,92)">
+                  <g transform="translate(0,0)">
+                    <ellipse cx="32" cy="34" rx="26" ry="22" fill="#111"/>
+                    <circle cx="22" cy="26" r="10" fill="#151515"/>
+                    <circle cx="42" cy="26" r="10" fill="#151515"/>
+                    <path d="M16 18 L6 6 Q16 8 18 18Z" fill="#111"/>
+                    <path d="M48 18 L58 6 Q48 8 46 18Z" fill="#111"/>
+                    <circle cx="26" cy="28" r="2.4" fill="#fff"/>
+                    <circle cx="38" cy="28" r="2.4" fill="#fff"/>
+                    <circle cx="26" cy="28" r="1.2" fill="#000"/>
+                    <circle cx="38" cy="28" r="1.2" fill="#000"/>
+                    <path d="M30 36 Q32 40 34 36" stroke="#444" stroke-width="3" stroke-linecap="round"/>
+                    <rect x="18" y="40" width="28" height="6" rx="3" fill="#8BE9FD"/>
+                    <text x="32" y="55" text-anchor="middle"
+                          font-size="10" font-weight="900" fill="#ffffff"
+                          style="letter-spacing:.04em; paint-order: stroke; stroke: rgba(0,0,0,.55); stroke-width:1;">
+                      ELLA
+                    </text>
+                  </g>
+
+                  <g transform="translate(62,2)">
+                    <ellipse cx="32" cy="34" rx="26" ry="22" fill="#0F0F0F"/>
+                    <circle cx="22" cy="26" r="10" fill="#141414"/>
+                    <circle cx="42" cy="26" r="10" fill="#141414"/>
+                    <path d="M16 18 L6 6 Q16 8 18 18Z" fill="#0F0F0F"/>
+                    <path d="M48 18 L58 6 Q48 8 46 18Z" fill="#0F0F0F"/>
+                    <circle cx="26" cy="28" r="2.4" fill="#fff"/>
+                    <circle cx="38" cy="28" r="2.4" fill="#fff"/>
+                    <circle cx="26" cy="28" r="1.2" fill="#000"/>
+                    <circle cx="38" cy="28" r="1.2" fill="#000"/>
+                    <path d="M30 36 Q32 40 34 36" stroke="#444" stroke-width="3" stroke-linecap="round"/>
+                    <rect x="18" y="40" width="28" height="6" rx="3" fill="#FF79C6"/>
+                    <text x="32" y="55" text-anchor="middle"
+                          font-size="9" font-weight="900" fill="#ffffff"
+                          style="letter-spacing:.02em; paint-order: stroke; stroke: rgba(0,0,0,.55); stroke-width:1;">
+                      HENRIETTA
+                    </text>
+                  </g>
                 </g>
-              </g>
 
-              <!-- him -->
-              <g transform="translate(70,18)">
-                <circle cx="42" cy="34" r="22" fill="#E7C7A1"/>
-                <path d="M22 30 Q42 6 62 30 Q60 12 42 10 Q24 12 22 30Z" fill="#5A3B2E"/>
-                <circle cx="30" cy="34" r="2.2" fill="#2B2B2B"/>
-                <circle cx="52" cy="34" r="2.2" fill="#2B2B2B"/>
-                <path d="M36 44 Q42 48 48 44" stroke="#2B2B2B" stroke-width="3" stroke-linecap="round"/>
-                <rect x="18" y="56" width="48" height="52" rx="18" fill="#4E2A84"/>
-                <path d="M22 78 H62" stroke="rgba(255,255,255,.25)" stroke-width="2"/>
-                <text x="42" y="88" text-anchor="middle" font-size="16" font-weight="1000" fill="#fff">N</text>
-              </g>
+                <!-- him -->
+                <g transform="translate(70,18)">
+                  <circle cx="42" cy="34" r="22" fill="#E7C7A1"/>
+                  <path d="M22 30 Q42 6 62 30 Q60 12 42 10 Q24 12 22 30Z" fill="#5A3B2E"/>
+                  <circle cx="30" cy="34" r="2.2" fill="#2B2B2B"/>
+                  <circle cx="52" cy="34" r="2.2" fill="#2B2B2B"/>
+                  <path d="M36 44 Q42 48 48 44" stroke="#2B2B2B" stroke-width="3" stroke-linecap="round"/>
+                  <rect x="18" y="56" width="48" height="52" rx="18" fill="#4E2A84"/>
+                  <path d="M22 78 H62" stroke="rgba(255,255,255,.25)" stroke-width="2"/>
+                  <text x="42" y="88" text-anchor="middle" font-size="16" font-weight="1000" fill="#fff">N</text>
+                </g>
 
-              <!-- her -->
-              <g transform="translate(128,18)">
-                <circle cx="42" cy="34" r="22" fill="#DDBE9A"/>
-                <path d="M18 34 Q20 10 42 10 Q64 10 66 34 Q58 20 42 20 Q26 20 18 34Z" fill="#1E1A1A"/>
-                <path d="M22 40 Q26 64 42 66 Q58 64 62 40 Q52 56 42 56 Q32 56 22 40Z" fill="#1E1A1A" opacity="0.95"/>
-                <circle cx="30" cy="34" r="2.2" fill="#2B2B2B"/>
-                <circle cx="52" cy="34" r="2.2" fill="#2B2B2B"/>
-                <path d="M36 44 Q42 50 48 44" stroke="#2B2B2B" stroke-width="3" stroke-linecap="round"/>
-                <rect x="18" y="56" width="48" height="52" rx="18" fill="#4E2A84"/>
-                <path d="M22 78 H62" stroke="rgba(255,255,255,.25)" stroke-width="2"/>
-                <text x="42" y="88" text-anchor="middle" font-size="16" font-weight="1000" fill="#fff">N</text>
-              </g>
+                <!-- her -->
+                <g transform="translate(128,18)">
+                  <circle cx="42" cy="34" r="22" fill="#DDBE9A"/>
+                  <path d="M18 34 Q20 10 42 10 Q64 10 66 34 Q58 20 42 20 Q26 20 18 34Z" fill="#1E1A1A"/>
+                  <path d="M22 40 Q26 64 42 66 Q58 64 62 40 Q52 56 42 56 Q32 56 22 40Z" fill="#1E1A1A" opacity="0.95"/>
+                  <circle cx="30" cy="34" r="2.2" fill="#2B2B2B"/>
+                  <circle cx="52" cy="34" r="2.2" fill="#2B2B2B"/>
+                  <path d="M36 44 Q42 50 48 44" stroke="#2B2B2B" stroke-width="3" stroke-linecap="round"/>
+                  <rect x="18" y="56" width="48" height="52" rx="18" fill="#4E2A84"/>
+                  <path d="M22 78 H62" stroke="rgba(255,255,255,.25)" stroke-width="2"/>
+                  <text x="42" y="88" text-anchor="middle" font-size="16" font-weight="1000" fill="#fff">N</text>
+                </g>
 
-              <path d="M110 56
-                       C110 46 122 46 122 56
-                       C122 64 110 70 110 70
-                       C110 70 98 64 98 56
-                       C98 46 110 46 110 56Z"
-                    fill="#FF79C6" opacity="0.9"/>
-            </svg>
+                <path d="M110 56
+                         C110 46 122 46 122 56
+                         C122 64 110 70 110 70
+                         C110 70 98 64 98 56
+                         C98 46 110 46 110 56Z"
+                      fill="#FF79C6" opacity="0.9"/>
+              </svg>
 
-            <div>
-              <div class="title">Us + the pups</div>
-              <small>Northwestern drip + Ella + Henrietta 🐾</small>
+              <div class="stickerText">
+                <div class="title">Us + the pups</div>
+                <small>Northwestern drip + Ella + Henrietta 🐾</small>
+              </div>
             </div>
-          </div>
 
-          <div class="sticker">
-            <svg class="bigSvg" viewBox="0 0 220 160" xmlns="http://www.w3.org/2000/svg" aria-label="Arapaima fish">
-              <defs>
-                <linearGradient id="fish" x1="0" x2="1">
-                  <stop offset="0" stop-color="#8BE9FD" stop-opacity=".55"/>
-                  <stop offset="1" stop-color="#FF79C6" stop-opacity=".45"/>
-                </linearGradient>
-              </defs>
-              <g transform="translate(10,40)">
-                <path d="M30 40
-                         Q70 10 130 22
-                         Q172 30 190 52
-                         Q172 74 130 82
-                         Q70 94 30 64
-                         Q18 52 30 40Z"
-                      fill="url(#fish)" stroke="rgba(0,0,0,.10)" stroke-width="3"/>
-                <path d="M190 52 L214 30 Q210 52 214 74Z"
-                      fill="rgba(255,121,198,.35)" stroke="rgba(0,0,0,.10)" stroke-width="3" stroke-linejoin="round"/>
-                <g opacity=".35" stroke="rgba(0,0,0,.25)" stroke-width="2">
-                  <path d="M62 36 Q74 28 88 34"/>
-                  <path d="M70 54 Q84 44 98 52"/>
-                  <path d="M92 38 Q106 30 120 38"/>
-                  <path d="M96 58 Q112 48 128 58"/>
-                  <path d="M126 46 Q142 38 156 46"/>
+            <!-- Tile 2: fish -->
+            <div class="stickerTile">
+              <svg class="bigSvg fishSvg" viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg" aria-label="Arapaima fish">
+                <defs>
+                  <linearGradient id="fish" x1="0" x2="1">
+                    <stop offset="0" stop-color="#8BE9FD" stop-opacity=".55"/>
+                    <stop offset="1" stop-color="#FF79C6" stop-opacity=".45"/>
+                  </linearGradient>
+                </defs>
+                <g transform="translate(10,36)">
+                  <path d="M30 46
+                           Q74 10 140 22
+                           Q188 32 208 56
+                           Q188 80 140 90
+                           Q74 102 30 66
+                           Q14 56 30 46Z"
+                        fill="url(#fish)" stroke="rgba(0,0,0,.10)" stroke-width="3"/>
+                  <path d="M208 56 L234 30 Q230 56 234 82Z"
+                        fill="rgba(255,121,198,.35)" stroke="rgba(0,0,0,.10)" stroke-width="3" stroke-linejoin="round"/>
+                  <g opacity=".35" stroke="rgba(0,0,0,.25)" stroke-width="2">
+                    <path d="M62 40 Q78 30 96 38"/>
+                    <path d="M76 60 Q92 48 112 58"/>
+                    <path d="M102 42 Q120 32 138 42"/>
+                    <path d="M112 66 Q132 54 154 66"/>
+                    <path d="M154 52 Q174 42 192 52"/>
+                  </g>
+                  <circle cx="52" cy="56" r="8" fill="rgba(0,0,0,.18)"/>
+                  <circle cx="50" cy="54" r="3" fill="#fff"/>
                 </g>
-                <circle cx="48" cy="50" r="8" fill="rgba(0,0,0,.18)"/>
-                <circle cx="46" cy="48" r="3" fill="#fff"/>
-              </g>
-            </svg>
-            <div>
-              <div class="title">Arapaima energy</div>
-              <small>tap surprise = fish confetti 🐟</small>
+              </svg>
+
+              <div class="stickerText">
+                <div class="title">Arapaima energy</div>
+                <small>tap surprise = fish confetti 🐟</small>
+              </div>
             </div>
+
+            <!-- Tile 3: NOTE moved inside strip -->
+            <div class="stickerTile" style="align-items:flex-start;">
+              <div>
+                <div style="font-size:13px; letter-spacing:.12em; text-transform:uppercase; color:#666; font-weight:900;">
+                  A NOTE (FROM ME)
+                </div>
+                <div style="margin-top:10px; font-size:16px; line-height:1.55; font-weight:800; color:#333;">
+                  I’m proud of you. Go be brilliant. And remember: even across an ocean,
+                  you’re still my <span class="hl">favorite person</span>.
+                </div>
+                <div style="margin-top:10px; color:#666; font-size:14px; font-weight:900;">
+                  PS: send me one Singapore photo that feels like “you.” 💛
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
 
-      <aside class="note">
-        <h2>A note (from me)</h2>
-        <p>
-          I’m proud of you. Go be brilliant. And remember: even across an ocean,
-          you’re still my <span class="hl">favorite person</span>.
-        </p>
-        <p style="margin-top:10px; color:#666; font-size:14px; font-weight:900;">
-          PS: send me one Singapore photo that feels like “you.” 💛
-        </p>
-      </aside>
+      <!-- NOTE removed from sidebar (now inside the strip) -->
+      <div aria-hidden="true"></div>
     </div>
 
     <section class="board">
@@ -649,13 +667,11 @@
           showToast("Paused 💛");
         }
       }catch(e){
-        // If the mp3 is missing or blocked
         showToast("Music file not found — upload ./assets/somebody-to-love.mp3 💛");
       }
     });
 
     // Countdown to Apr 4, 2026 12:00am ET
-    // Using explicit ET offset. (If DST matters near that date, we can switch to a timezone lib, but this is fine for a cute countdown.)
     const target = new Date("2026-04-04T00:00:00-05:00").getTime();
 
     const dEl = document.getElementById('d');
