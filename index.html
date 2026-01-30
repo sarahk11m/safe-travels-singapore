@@ -338,7 +338,36 @@
     @keyframes fall{
       to{ transform: translateY(110vh) rotate(360deg); opacity: 1; }
     }
+    
+    /* Checklist card */
+    .card{
+      margin-top: 22px;
+      background: rgba(255,255,255,.85);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
 
+/* Section title */
+    .section-title{
+      font-family: "Caveat", cursive;
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+/* Checklist pills */
+    .pill{
+      background: rgba(255,255,255,.9);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-size: 14px;
+      font-weight: 800;
+      text-align: center;
+      box-shadow: var(--shadow2);
+    }
     .toast{
       position: fixed;
       left: 50%;
@@ -598,8 +627,21 @@
         </div>
       </div>
     </section>
-  </div>
 
+    <section class="card span-12">
+      <div class="section-title">Tiny checklist for the trip</div>
+      <div style="display:grid; grid-template-columns: repeat(12,1fr); gap: 12px;">
+          <div class="pill" style="grid-column: span 4;">📱 charger + adapter</div>
+          <div class="pill" style="grid-column: span 4;">🪪 passport + docs</div>
+          <div class="pill" style="grid-column: span 4;">🧴 tiny toiletries</div>
+          <div class="pill" style="grid-column: span 4;">🧊 hydrate on flight</div>
+          <div class="pill" style="grid-column: span 4;">😴 nap like a pro</div>
+          <div class="pill" style="grid-column: span 4;">💬 text me when you land</div>
+        </div>
+</section>
+
+  </div>
+  
   <div class="toast" id="toast"></div>
 
   <audio id="comfortAudio" preload="auto">
